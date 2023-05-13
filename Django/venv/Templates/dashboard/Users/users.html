@@ -1,0 +1,64 @@
+{% extends "dashboard/layout/layout.html" %}
+
+{% block title %}
+Users
+{% endblock %}
+
+{%if success%}
+<p class="text-success">{{success}}</p>
+{%endif%}
+
+{% block content%}
+<div class="d-flex align-items-center justify-content-center">
+    <table class="table" style="width: 90%;">
+        <thead>
+            <tr>
+                <th scope="col">SN</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Main Image</th>
+                <th scope="col">Documents</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user, kyc in users %}
+            
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                {% if user.image %} 
+                <td><img src="{{user.image.url}}" alt="No image" height="50" width="50"/></td>
+                {%else%}
+                <td><p>No image</p></td>
+                {%endif%}
+                {%if kyc%}
+                <td>
+                    <img src="{{kyc.licenseImage.url}}" height="50" width="50"/>
+                    <img src="{{kyc.identityImage.url}}" height="50" width="50"/>
+                </td>
+                {%else%}
+                <td>No documents added</td>
+                {%endif%}
+                <td>
+                    {%if user.isApproved == False%}
+                    <button class="btn btn-warning mx-1">Pending</button>
+                    {%else%}
+                    <button class="btn btn-success mx-1">Approved</button>
+                    {% endif %}
+                </td>
+                <td>
+                    {%if user.isApproved == False%}
+                   <a href="{% url 'approve-user' user.id %}"> <button class="btn btn-primary mx-1">Approve</button></a>
+                    {%else%}
+                    <a href="{% url 'disapprove-user' user.id %}"> <button class="btn btn-danger mx-1">Disapprove</button></a>
+                    {% endif %}
+                </td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
+{% endblock%}

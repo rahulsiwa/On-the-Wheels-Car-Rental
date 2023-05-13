@@ -1,0 +1,31 @@
+{% extends "dashboard/layout/layout.html" %}
+
+{% block title %}
+Categories
+{% endblock %}
+
+  {% block content%}
+  <div class="d-flex align-items-center justify-content-center">
+    <table class="table" style="width: 90%;">
+      <thead>
+        <tr>
+          <th scope="col">SN</th>
+          <th scope="col">Category</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for cat in categories %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{cat.name}}</td>
+          <td>
+            <a type="button" href="{% url 'edit-category' cat.id %}" class="btn btn-primary">Edit</a>
+            <a type="button" href="{% url 'delete-category' cat.id %}" class="btn btn-danger">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endblock%}

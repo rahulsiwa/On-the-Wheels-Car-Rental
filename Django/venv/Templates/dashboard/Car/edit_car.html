@@ -1,0 +1,114 @@
+{% extends "dashboard/layout/layout.html" %}
+
+{% block title %}
+Edit Car
+{% endblock %}
+
+{% block content%}
+
+{% if success %}
+<div
+style="background-color: lightgreen; padding:20px"
+>
+{{success}}
+</div>
+{% endif %}
+
+{% if error %}
+<div
+style="background-color: red; padding:20px"
+>
+{{error}}
+</div>
+{% endif %}
+
+<form class="m-3" method="post" action="/update-car/{{car.id}}" enctype="multipart/form-data">
+  {% csrf_token %}
+
+ <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Category</label>
+        <select class="form-select form-control" name="category" aria-label="Default select example">
+            <option>Select category</option>
+            {% for cat in categories %}
+           
+            <option value="{{cat.id}}" {% if cat.name == car.category.name %}selected{% endif %}>{{cat.name}}</option>
+            {% endfor %}
+          </select>
+        </div> 
+
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Name</label>
+        <input type="text" value="{{car.name}}" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+       
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Price</label>
+        <input type="number" name="price" value="{{car.price}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+       
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Seater</label>
+        <input type="text" name="seater" value="{{car.seater}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+       
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Engine</label>
+        <select class="form-select form-control" name="engine" aria-label="Default select example">
+          <option selected>Select engine type</option>
+          <option value="Petrol" {% if car.engine == "Petrol" %}selected{%endif%}>Petrol engine</option>
+          <option value="Diesel" {% if car.engine == "Diesel" %}selected{%endif%}>Diesel engine</option>
+        </select>
+    
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Max power(BPH)</label>
+        <input type="number" name="max_power" value="{{car.max_power}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Top Speed (km/hr)</label>
+        <input type="number" name="top_speed" value="{{car.top_speed}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">CC</label>
+        <input type="number" name="color" value="{{car.motor}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Air Conditioner</label>
+        <input type="checkbox" name="air_conditioner" value="True" id="exampleInputEmail1" {%if car.air_conditioner %} checked {%endif%} aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Music</label>
+        <input type="checkbox" name="music" id="exampleInputEmail1" {%if car.music %} checked {%endif%} value="True"  aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Sunroof</label>
+        <input type="checkbox" name="sun_roof"  id="exampleInputEmail1" {%if car.sun_roof %} checked {%endif%} value="True"  aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Driver</label>
+        <input type="checkbox" name="driver" {%if car.driver %} checked {%endif%} value="True" id="exampleInputEmail1"  aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Color</label>
+        <input type="text" name="color" value="{{car.color}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+       
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Main Image</label>
+        <input type="file" name="main_image" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Other Images</label>
+        <input type="file" name="images" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" multiple>
+      
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Description</label>
+        <textarea name="description"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">{{car.description}}</textarea>
+       
+      </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+{% endblock%}
+

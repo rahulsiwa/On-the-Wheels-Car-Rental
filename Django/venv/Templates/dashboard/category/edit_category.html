@@ -1,0 +1,29 @@
+{% extends "dashboard/layout/layout.html" %}
+
+{% block title %}
+Edit Category
+{% endblock %}
+
+{% block content%}
+
+{% if success %}
+<div
+style="background-color: lightgreen; padding:20px"
+>
+{{success}}
+</div>
+{% endif %}
+
+<form class="m-3" method="post" action="/update-category/{{category.id}}">
+  {% csrf_token %}
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Category</label>
+      <input type="text" name="name" value="{{ category.name }}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      {% if error %}
+          <p style="color: red;">{{error}}</p>
+      {% endif %}
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+  </form>
+{% endblock%}
+

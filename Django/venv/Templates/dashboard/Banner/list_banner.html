@@ -1,0 +1,33 @@
+{% extends "dashboard/layout/layout.html" %}
+
+{% block title %}
+Banners
+{% endblock %}
+
+  {% block content%}
+  <div class="d-flex align-items-center justify-content-center">
+    <table class="table" style="width: 90%;">
+      <thead>
+        <tr>
+          <th scope="col">SN</th>
+          <th scope="col">Title</th>
+          <th scope="col">Image</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for ban in banners %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{ban.title}}</td>
+          <td><img src="{{ban.image.url}}" height="50" width="50" style="border-radius:50%"/></td>
+          <td>
+            <a type="button" href="{% url 'edit-banner' ban.id %}" class="btn btn-primary">Edit</a>
+            <a type="button" href="{% url 'delete-banner' ban.id %}" class="btn btn-danger">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endblock%}

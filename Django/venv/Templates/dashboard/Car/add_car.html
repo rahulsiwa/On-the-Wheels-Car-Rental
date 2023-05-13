@@ -1,0 +1,100 @@
+{% extends "dashboard/layout/layout.html" %}
+
+{% block title %}
+Add Car
+{% endblock %}
+
+{% block content%}
+
+{% if success %}
+<div style="background-color: lightgreen; padding:20px">
+  {{success}}
+</div>
+{% endif %}
+
+<form class="m-3" method="post" action="{% url 'add-car' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Category</label>
+    <select class="form-select form-control" name="category" aria-label="Default select example">
+      <option selected>Select category</option>
+      {% for cat in categories%}
+      <option value="{{cat.id}}">{{cat.name}}</option>
+      {%endfor%}
+    </select>
+
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Name</label>
+    <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Price</label>
+    <input type="number" name="price" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Seater</label>
+    <input type="text" name="seater" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Engine</label>
+    <select class="form-select form-control" name="engine" aria-label="Default select example">
+      <option selected>Select engine type</option>
+      <option value="Petrol">Petrol engine</option>
+      <option value="Diesel">Diesel engine</option>
+    </select>
+
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Max power(BPH)</label>
+    <input type="number" name="max_power" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Top Speed (km/hr)</label>
+    <input type="number" name="top_speed" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">CC</label>
+    <input type="number" name="color" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Air Conditioner</label>
+    <input type="checkbox" name="air_conditioner" id="exampleInputEmail1" value="True" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Music</label>
+    <input type="checkbox" name="music" id="exampleInputEmail1" value="True" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Sunroof</label>
+    <input type="checkbox" name="sun_roof"  id="exampleInputEmail1" value="True" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Driver</label>
+    <input type="checkbox" name="driver"  id="exampleInputEmail1" value="True" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Color</label>
+    <input type="text" name="color" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Main View Image</label>
+    <input type="file" name="main_image" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      multiple>
+
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Other Images</label>
+      <input type="file" name="images" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+        multiple>
+
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Description</label>
+      <textarea name="description" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></textarea>
+
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock%}

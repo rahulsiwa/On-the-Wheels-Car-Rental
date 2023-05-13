@@ -1,0 +1,61 @@
+{% extends "dashboard/layout/layout.html" %}
+
+{% block title %}
+Cars
+{% endblock %}
+
+  {% block content%}
+  <div class="d-flex align-items-center justify-content-center">
+    <table class="table" style="width: 90%;">
+      <thead>
+        <tr>
+          <th scope="col">SN</th>
+          <th scope="col">Category</th>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Main Image</th>
+          <th scope="col">Other Images</th>
+          <th scope="col">Color</th>
+          <th scope="col">Seater</th>
+          <th scope="col">Air Conditioner</th>
+          <th scope="col">Music</th>
+          <th scope="col">Sunroof</th>
+          <th scope="col">Driver</th>
+          <th scope="col">Engine</th>
+          <th scope="col">Description</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for car, images in cars %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{car.category}}</td>
+          <td>{{car.name}}</td>
+          <td>Rs.{{car.price}}</td>
+          <td><img height="50" width="50" src="{{ car.main_image.url}}"/> </td>
+          <td>
+            <div class="row">
+              {% for image in images %}
+              <img height="50" width="50" src="{{image.image.url}}"/> 
+              {%endfor%}
+            </div>
+          </td>
+          <td>{{car.color}}</td>
+          <td>{{car.seater}}</td>
+          <td>{{car.air_conditioner}}</td>
+          <td>{{car.music}}</td>
+          <td>{{car.sun_roof}}</td>
+          <td>{{car.driver}}</td>
+          <td>{{car.engine}}</td>
+          <td>{{car.description}}</td>
+          <td>
+            <a type="button" href="{% url 'edit-car' car.id %}" class="btn btn-primary">Edit</a>
+            <a type="button" href="{% url 'delete-car' car.id %}" class="btn btn-danger">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endblock%}
